@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Star Wars API</title>
+    <!-- Styles -->
+    <link rel="stylesheet" href="css.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body id="starwarsBody">
+    <div class="container">
+        <div class="input-group-append">
+            <button id="darkSideButton" class="btn btn-outline-secondary">COME TO THE DARKSIDE</button>
+        </div>
+        <div class="col epic">
+            <h4>
+                YOUR FAVORITE
+                <div class="lettersImg">
+                    <img src="img/logo.svg.png" alt="star wars logo" width=350em>
+                </div>
+                MOVIE PART NUMBER ENTER YOU MUST
+            </h4>
+        </div>
+        <form name="search">
+            <div class="col">
+                <div class="input-group mb-3 inp">
+                    <input id="input" type="number" class="form-control" placeholder="MAY THE FORCE BE WITH YOU" aria-label="Chemical brothers" aria-describedby="button-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit" id="button-addon2"> PUSH THE BUTTON</button>
+                    </div>
+                </div>
+        </form>
+        <div class="col" id="content">
+            <p id="content1"></p>
+            <p id="content2"></p>
+            <p id="content3"></p>
+        </div>
+        <div class="text-center">
+            <button type="button" id="saveButton" class="btn btn-outline-secondary" style="display: none">SAVE TO
+            DATABASE</button>
+        </div>
+        <table id="dataTable" class="table table-hover table-dark" style="display: none">
+            <thead>
+                <th>EDIT</th>
+                <th>DIRECTOR</th>
+                <th>RELEASE DATE</th>
+                <th>TITLE</th>
+                <th>EPISODE</th>
+                <th>DELETE</th>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <div id="root"></div>
+        </div>
+        <!-- Scripts -->
+        <script src="scriptStarWars.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+</body>
+
+</html>

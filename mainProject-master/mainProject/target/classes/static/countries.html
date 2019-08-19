@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DARK SIDE</title>
+    <!-- Styles -->
+    <link rel="stylesheet" href="css.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body id="countriesBody">
+
+    <div class="overlay">
+        <form class="countriesForm" name="get" id="form1">
+            <div class="row">
+                <div class="col">
+                    <h5>SEARCH COUNTRY BY:</h5>
+                    <select id="select" class="form-control select">
+                    <option value="name">Country name</option>
+                    <option value="capital">Capital</option>
+                    <!-- <option value="currency">Currency</option> -->
+                    <option value="callingcode">Calling code</option>
+                    <!-- <option value="lang">Language</option> -->
+                    <!-- <option value="region">Region</option> -->
+                </select>
+                    <input type="text" class="form-control" id="keyword" placeholder="Write to search">
+                    <input type="date" class="form-control" id="departureDate" placeholder="Choose a date for a flight">
+                </div>
+            </div>
+            <div>
+                <button type="submit" form="form1" class="form-control searchButton">Search</button>
+            </div>
+        </form>
+        <div class="col" id="content">
+            <p id="flag"></p>
+            <p id="countryName"></p>
+            <h6 id="weather"></h6>
+            <p id="weatherReport"></p>
+            <h6 id="tickets"></h6>
+            <p id="nearestAirport"></p>
+        </div>
+    </div>
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="scriptCountries.js"></script>
+</body>
+
+</html>
