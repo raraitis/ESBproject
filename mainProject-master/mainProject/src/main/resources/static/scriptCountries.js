@@ -1,4 +1,6 @@
-// Script for my ESB project, where I call webMethod service wich returns data from 5 differnet API's
+// Script for my ESB project, where I call webMethod service wich returns data from 5 differnet API's. 
+// NEED TO IMPROVE USER EXPERIENCE A LOT.
+// But the at this stage main focus is on a working application
 
 var app = document.getElementById('root');
 var parameters = "";
