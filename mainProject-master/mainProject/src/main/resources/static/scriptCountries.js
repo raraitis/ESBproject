@@ -1,3 +1,5 @@
+// Script for my ESB project, where I call webMethod service wich returns data from 5 differnet API's
+
 var app = document.getElementById('root');
 var parameters = "";
 var keyword = "";
