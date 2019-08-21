@@ -17,7 +17,7 @@
         <form class="countriesForm" name="get" id="form1">
             <div class="row">
                 <div class="col">
-                    <h5>SEARCH COUNTRY BY:</h5>
+                    <h6>SEARCH INFORMATION ABOUT ALL COUNTRIES IN THE WORLD</h6>
                     <select id="select" class="form-control select">
                     <option value="name">Country name</option>
                     <option value="capital">Capital</option>
@@ -27,17 +27,24 @@
                     <!-- <option value="region">Region</option> -->
                 </select>
                     <input type="text" class="form-control" id="keyword" placeholder="Write to search">
-                    <input type="date" class="form-control" id="departureDate" placeholder="Choose a date for a flight">
+                    <input type="date" class="form-control" id="departureDate">
                 </div>
             </div>
             <div>
                 <button type="submit" form="form1" class="form-control searchButton">Search</button>
             </div>
         </form>
+        <div id="myAlert" class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>OOPS!</strong> You should enter country name, capital city or calling code.
+            <button id="alertButton" type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
         <div class="col" id="content">
             <p id="flag"></p>
             <p id="countryName"></p>
             <h6 id="weather"></h6>
+            <div id="icon"></div>
             <p id="weatherReport"></p>
             <h6 id="tickets"></h6>
             <p id="nearestAirport"></p>

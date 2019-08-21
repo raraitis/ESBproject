@@ -99,7 +99,7 @@ marquee {
 }
 
 .searchButton {
-    margin-top: 10%;
+    margin-top: 1%;
     margin-left: auto;
     margin-right: auto;
     max-width: 20em;
@@ -126,6 +126,7 @@ h5,
 h6 {
     color: #202020;
     text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #countriesBody {
@@ -134,6 +135,27 @@ h6 {
     background-position: left, right;
     background-color: rgba(59, 42, 42, 0);
     max-width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@media (min-width: 100px) {
+    #countriesBody {
+        background: url(img/countriesBackground.jpg);
+        background-repeat: no-repeat;
+        background-position: right;
+        margin-top: 60%;
+    }
+}
+
+@media (min-width: 1400px) {
+    #countriesBody {
+        background: url(img/countriesBackground.jpg), url(img/countriesBackground.jpg);
+        background-repeat: repeat-y, repeat-y;
+        background-position: left, right;
+        background-color: rgba(59, 42, 42, 0);
+        max-width: 100%;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 }
 
 #countryName,
@@ -157,55 +179,12 @@ h6 {
     background-color: rgba(59, 42, 42, 0.1);
 }
 
-
-/***************************************************************/
-
-input[type="date"] {
-    position: relative;
+.alert {
+    display: none;
 }
 
-
-/* create a new arrow, because we are going to mess up the native one
-see "List of symbols" below if you want another, you could also try to add a font-awesome icon.. */
-
-input[type="date"]:after {
-    content: "\25BC";
-    color: #555;
-    padding: 0 5px;
-}
-
-
-/* change color of symbol on hover */
-
-input[type="date"]:hover:after {
-    color: #bf1400;
-}
-
-
-/* make the native arrow invisible and stretch it over the whole field so you can click anywhere in the input field to trigger the native datepicker*/
-
-input[type="date"]::-webkit-calendar-picker-indicator {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: auto;
-    height: auto;
-    color: transparent;
-    background: transparent;
-}
-
-
-/* adjust increase/decrease button */
-
-input[type="date"]::-webkit-inner-spin-button {
-    z-index: 1;
-}
-
-
-/* adjust clear button */
-
-input[type="date"]::-webkit-clear-button {
-    z-index: 1;
+#myAlert {
+    max-width: 35%;
+    margin-left: auto;
+    margin-right: auto;
 }

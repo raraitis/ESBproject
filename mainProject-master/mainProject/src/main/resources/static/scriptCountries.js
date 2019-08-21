@@ -1,6 +1,7 @@
 // Script for my ESB project, where I call webMethod service wich returns data from 5 differnet API's. 
 // NEED TO IMPROVE USER EXPERIENCE A LOT.
 // But the at this stage main focus is on a working application
+// Also having problems with API that returns the flights, the json is nor formated correctly for some responses and I`m getting errors, need to sort this in webMethods
 
 var app = document.getElementById('root');
 var parameters = "";
@@ -12,6 +13,8 @@ const endpoint = {
 
 const countriesApp = {
 
+
+
     show: function show(submitEvent) {
         parameters = $("#select").val();
         keyword = $("#keyword").val();
@@ -20,49 +23,59 @@ const countriesApp = {
             method: 'GET'
         });
 
+
         submitEvent.preventDefault();
-        fetch(request)
-            .then(response => response.json())
-            .then((data) => {
-                    console.log(data);
-                    var country = data.countryData[0];
-                    var weatherData = data.weatherData;
-                    var airportData = data.airportDocRef;
-                    var flightInfo = data.allFlights.flightData;
-                    console.log(flightInfo);
-                    var price = "";
-                    var placeFrom = "";
-                    var placeTo = "";
-                    var priceArr = [];
-                    flightInfo.forEach(elem => {
+        if (keyword != "") {
+            fetch(request)
+                .then(response => response.json())
+                .then((data) => {
+                        console.log(data);
+                        var country = data.countryData[0];
+                        var weatherData = data.weatherData;
+                        var iconcode = weatherData.weather[0].icon;
+                        var airportData = data.airportDocRef;
+                        var flightInfo = data.allFlights.flightData;
+                        var validationError = flightInfo[0].ValidationErrors;
+                        var price = "";
+                        var placeFrom = "";
+                        var placeTo = "";
+                        var priceArr = [];
+                        flightInfo.forEach(elem => {
 
-                        if (elem.Quotes == 0) {
-                            console.log("sorry");
-                            $("#nearestAirport").html(`Sorry, try another date!`)
-                        } else if (elem.Quotes != null || elem.Quotes != 0) {
-                            console.log(elem.Quotes)
-                            price = elem.Quotes[0];
-                            placeTo = elem.Places[0];
-                            placeFrom = elem.Places[1];
-                            priceArr.push(price.MinPrice);
-                            priceArr.sort();
-                            cheapestTicket = priceArr[0];
-                            $("#nearestAirport").html(`Cheapest flight on the ${departureDate} from ${placeFrom.Name} to ${placeTo.Name} at: ${cheapestTicket}$ `)
-                        }
-                    });
-                    $("#content").show();
-                    $("#flag").html(`<img src="${data.countryFlagUrl}">`)
-                    $("#countryName").html(`Country name is ${country.name} and the capital is ${country.capital}.`);
-                    $("#weather").html(`Weather report in ${country.capital}:`);
-                    $("#weatherReport").html(`Today it is ${weatherData.weather[0].description} and max temperature is going to be ${weatherData.main.temp_max} &#x2103;`);
-                    $("#tickets").html(`Get flight tickets to ${country.capital}:`);
+                            if (elem.Quotes == 0) {
+                                $("#nearestAirport").html(`Sorry, try another date!`)
+                            } else if (validationError) {
+                                $("#nearestAirport").html(`Sorry, can't display any flights! Please try again later! `)
+
+                            } else if (elem.Quotes != null || elem.Quotes != 0) {
+                                price = elem.Quotes[0];
+                                placeTo = elem.Places[0];
+                                placeFrom = elem.Places[1];
+                                priceArr.push(price.MinPrice);
+                                priceArr.sort();
+                                cheapestTicket = priceArr[0];
+                                $("#nearestAirport").html(`Cheapest flight on the ${departureDate} from ${placeFrom.Name} to ${placeTo.Name}: ${cheapestTicket}$ `)
+                            }
+                        });
+                        $("#content").show();
+                        $("#flag").html(`<img src="${data.countryFlagUrl}">`)
+                        $("#countryName").html(`Country name is ${country.name} and the capital is ${country.capital}.`);
+                        $("#weather").html(`Weather report in ${country.capital}:`);
+                        $("#icon").html(`<img id="wicon" src="http://openweathermap.org/img/w/${iconcode}.png" alt="Weather icon">`)
+                        $("#weatherReport").html(`Today it is ${weatherData.weather[0].description} and max temperature is going to be ${weatherData.main.temp_max} &#x2103;`);
+                        $("#tickets").html(`Get flight tickets to ${country.capital}:`);
 
 
-                },
-                (error) => console.error(error));
+                    },
+                    (error) => console.error(error));
+        } else {
+            $("#myAlert").show();
+            $('#alertButton').on('click', function() {
+                $('#myAlert').hide();
+            })
+        }
     }
 }
-
 
 document.getElementById('departureDate').valueAsDate = new Date();
 document.forms["get"].addEventListener("submit", countriesApp.show);
