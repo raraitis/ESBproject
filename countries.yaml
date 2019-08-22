@@ -1,0 +1,331 @@
+swagger: "2.0"
+info:
+  version: "1.12"
+  title: "Countries api service"
+  contact:
+    email: "raitis.kraslovskis@cognizant.com"
+host: "dev.tip.corp.tele2.com:3402"
+basePath: "/T2_Sandbox/_2019/raitkras/api"
+schemes:
+- "http"
+paths:
+  /handleGetCountry:
+    get:
+      tags:
+      - "Get Information about country and capital city"
+      description: "Gets information about country and the weather of its cities also chepaest flights to capital city or airport nearby in 100km radius"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "request"
+        description: "Gets all informations and shows on the website "
+        required: true
+        schema:
+          $ref: "#/definitions/HandleGetGountryRequest"
+      responses:
+        200:
+          description: "For both Success and Failure responses"
+          schema:
+            $ref: "#/definitions/HandleGetGountryResponse"
+        500:
+          description: "Integration Server is unavailable"
+definitions:
+  HandleGetGountryRequest:
+    type: "object"
+    required:
+     - "parameters"
+     - "keyword"
+     - "departureDate"
+    properties:
+      parameters:
+        type: "string"
+        example: "name"
+      keyword:
+        type: "string"
+        example: "Russia"
+      departureDate:
+        type: "string"
+        example: "2019-10-10"
+  HandleGetGountryResponse:
+      type: "object"
+      required:
+      - "nearestAirportData"
+      - "countryData"
+      - "countryFlagUrl"
+      - "allFlights"
+      - "weatherData"
+      properties:
+        nearestAirportData:
+          type: "object"
+          properties:
+            rootArray:
+              type: "array"
+              items:
+                type: "object"
+                properties:
+                  airportId:
+                    type: "string"
+                  code:
+                    type: "string"
+                  name:
+                    type: "string"
+                  location:
+                    type: "object"
+                    properties:
+                      longitude:
+                        type: "integer"
+                      latitude:
+                        type: "integer"
+                  cityId:
+                    type: "string"
+                  city:
+                    type: "string"
+                  country:
+                    type: "string"
+                  themes:
+                    type: "string"
+                  pointsOfSale:
+                    type: "string"
+        countryData:
+          type: "object"
+          properties:
+            rootArray:
+              type: "array"
+              items:
+                type: "object"
+                properties:
+                  name:
+                    type: "string"
+                  topLevelDomain:
+                    type: "string"
+                  alpha2Code:
+                    type: "string"
+                  alpha3Code:
+                    type: "string"
+                  callingCodes:
+                    type: "array"
+                    items:
+                      type: "string"
+                  capital:
+                    type: "string"
+                  altSpellings:
+                    type: "array"
+                    items:
+                      type: "string"
+                  region:
+                    type: "string"
+                  subregion:
+                    type: "string"
+                  population:
+                    type: "integer"
+                  latlng:
+                    type: "array"
+                    items:
+                      type: "integer"
+                  demonym:
+                    type: "string"
+                  area:
+                    type: "integer"
+                  gini: 
+                    type: "integer"
+                  timezones:
+                    type: "array"
+                    items:
+                      type: "string"
+                  borders:
+                    type: "array"
+                    items:
+                      type: "string"
+                  nativeName:
+                    type: "string"
+                  numericCode:
+                    type: "string"
+                  currencies:
+                    type: "array"
+                    items:
+                      type: "string"
+                  languages:
+                    type: "array"
+                    items:
+                      type: "string"
+                  translations:
+                    type: "object"
+                    properties:
+                      de:
+                        type: "string"
+                      es:
+                        type: "string"
+                      fr:
+                        type: "string"
+                      ja:
+                        type: "string"
+                      it:
+                        type: "string"
+        countryFlagUrl:
+          type: "string"
+          example: "https://www.countryflags.io/be/shiny/64.png"
+        allFlights:
+          type: "object"
+          properties:
+            flightData:
+              type: "array"
+              items:
+                type: "object"
+                properties:
+                  Quotes:
+                    type: "array"
+                    items: 
+                      type: "object"
+                      properties:
+                        QuoteId:
+                          type: "integer"
+                        MinPrice:
+                          type: "integer"
+                        Direct:
+                          type: "boolean"
+                        OutboundLeg:
+                          type: "object"
+                          properties:
+                            CarrierIds:
+                              type: "array"
+                              items:
+                                type: "integer"
+                            OriginId:
+                              type: "integer"
+                            DestinationId:
+                              type: "integer"
+                            DepartureDue:
+                              type: "string"
+                        QuoteDateTime:
+                          type: "string"
+                  Places:
+                    type: "array"
+                    items:
+                      type: "object"
+                      properties:
+                        placeId:
+                          type: "integer"
+                        IataCode: 
+                          type: "string"
+                        Name:
+                          type: "string"
+                        Type:
+                          type: "string"
+                        SkyscannerCode:
+                          type: "string"
+                        CityName:
+                          type: "string"
+                        CityId:
+                          type: "string"
+                        CountryName:
+                          type: "string"
+                  Carriers:
+                    type: "array"
+                    items: 
+                      type: "object"
+                      properties:
+                        CarrierId:
+                          type: "integer"
+                        Name:
+                          type: "string"
+                  Currencies:
+                    type: "array"
+                    items:
+                      type: "object"
+                      properties:
+                        Code:
+                          type: "string"
+                        Symbol:
+                          type: "string"
+                        ThousandsSeperator: 
+                          type: "string"
+                        DecimalSeperator:
+                          type: "string"
+                        SymnbolOnLeft:
+                          type: "boolean"
+                        SpaceBetweenAmountAndSymbol:
+                          type: "boolean"
+                        RoundingCoeffiecient:
+                          type: "integer"
+                        DecimalDigits:
+                          type: "integer"
+        weatherData:
+          type: "object"
+          properties:
+            coord:
+              type: "object"
+              properties:
+                lon:
+                  type: "integer"
+                lat:
+                  type: "integer"
+            weather:
+              type: "array"
+              items:
+                type: "object"
+                properties:
+                  id:
+                    type: "integer"
+                  main:
+                    type: "string"
+                  description:
+                    type: "string"
+                  icon: 
+                    type: "string"
+            base:
+              type: "string"
+            main:
+              type: "object"
+              properties:
+                temp:
+                  type: "integer"
+                pressure:
+                  type: "integer"
+                humidity:
+                  type: "integer"
+                temp_min:
+                  type: "integer"
+                temp_max:
+                  type: "integer"
+            visibility:
+              type: "integer"
+            wind:
+              type: "object"
+              properties:
+                speed:
+                  type: "integer"
+                deg:
+                  type: "integer"
+            clouds:
+              type: "object"
+              properties:
+                all:
+                  type: "integer"
+            dt:
+              type: "integer"
+            sys:
+              type: "object"
+              properties:
+                type:
+                  type: "integer"
+                id:
+                  type: "integer"
+                message:
+                  type: "integer"
+                country:
+                  type: "string"
+                sunrise:
+                  type: "integer"
+                sunset: 
+                  type: "integer"
+            timezone:
+              type: "integer"
+            id:
+              type: "integer"
+            name:
+              type: "string"
+            code:
+              type: "integer"
