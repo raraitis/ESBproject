@@ -14,7 +14,6 @@ const endpoint = {
 const countriesApp = {
 
 
-
     show: function show(submitEvent) {
         parameters = $("#select").val();
         keyword = $("#keyword").val();
@@ -55,15 +54,17 @@ const countriesApp = {
                                 priceArr.sort();
                                 cheapestTicket = priceArr[0];
                                 $("#nearestAirport").html(`Cheapest flight on the ${departureDate} from ${placeFrom.Name} to ${placeTo.Name}: ${cheapestTicket}$ `)
+
                             }
                         });
                         $("#content").show();
                         $("#flag").html(`<img src="${data.countryFlagUrl}">`)
-                        $("#countryName").html(`Country name is ${country.name} and the capital is ${country.capital}.`);
+                        $("#countryName").html(`The capital city of ${country.name} is ${country.capital}.`);
                         $("#weather").html(`Weather report in ${country.capital}:`);
                         $("#icon").html(`<img id="wicon" src="http://openweathermap.org/img/w/${iconcode}.png" alt="Weather icon">`)
                         $("#weatherReport").html(`Today it is ${weatherData.weather[0].description} and max temperature is going to be ${weatherData.main.temp_max} &#x2103;`);
                         $("#tickets").html(`Get flight tickets to ${country.capital}:`);
+                        $('#myAlert').remove();
 
 
                     },
