@@ -95,7 +95,7 @@ marquee {
 /************************************************************** Countries api app styles **************************************************************/
 
 .countriesForm {
-    margin-top: 8%;
+    margin-top: 1%;
 }
 
 .searchButton {
@@ -127,7 +127,7 @@ h6 {
     color: #202020;
     text-align: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    padding-top: 0.7em;
+    padding-top: 0.5em;
 }
 
 #countriesBody {
@@ -168,7 +168,21 @@ h6 {
     margin-left: auto;
     margin-right: auto;
     font-size: 1rem;
-    margin-top: 0.5em;
+}
+
+#flag {
+    padding-top: 0.5em;
+}
+
+p>img {
+    width: 100px;
+}
+
+#countryName,
+#weatherReport,
+#icon {
+    margin-bottom: 1px;
+    margin-top: 1px;
 }
 
 .overlay {

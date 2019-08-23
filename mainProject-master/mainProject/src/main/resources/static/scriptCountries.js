@@ -1,7 +1,7 @@
 // Script for my ESB project, where I call webMethod service wich returns data from 5 differnet API's. 
 // NEED TO IMPROVE USER EXPERIENCE A LOT.
-// But the at this stage main focus is on a working application
-// Also having problems with API that returns the flights, the json is nor formated correctly for some responses and I`m getting errors, need to sort this in webMethods
+// But at this stage main focus is on a working application
+// Also having problems with API that returns flights, JSON is not formated correctly for all the countries, getting errors, need to sort this in webMethods
 
 var app = document.getElementById('root');
 var parameters = "";
@@ -26,8 +26,14 @@ const countriesApp = {
         submitEvent.preventDefault();
         if (keyword != "") {
             fetch(request)
-                .then(response => response.json())
-                .then((data) => {
+                .then(function(response) {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        $("#myAlert").show();
+                    }
+                    // .then(response => response.json()) 
+                }).then((data) => {
                         console.log(data);
                         var country = data.countryData[0];
                         var weatherData = data.weatherData;
@@ -40,11 +46,12 @@ const countriesApp = {
                         var placeTo = "";
                         var priceArr = [];
                         flightInfo.forEach(elem => {
-
                             if (elem.Quotes == 0) {
-                                $("#nearestAirport").html(`Sorry, try another date!`)
+                                $("#nearestAirport").html(`Sorry, try another date! Or there might not be direct flights from Riga to ${country.capital}.`)
+                                $("#tickets").hide();
                             } else if (validationError) {
                                 $("#nearestAirport").html(`Sorry, can't display any flights! Please try again later! `)
+
 
                             } else if (elem.Quotes != null || elem.Quotes != 0) {
                                 price = elem.Quotes[0];
@@ -54,6 +61,7 @@ const countriesApp = {
                                 priceArr.sort();
                                 cheapestTicket = priceArr[0];
                                 $("#nearestAirport").html(`Cheapest flight on the ${departureDate} from ${placeFrom.Name} to ${placeTo.Name}: ${cheapestTicket}$ `)
+                                $("#tickets").show();
 
                             }
                         });
